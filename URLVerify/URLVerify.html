@@ -1,0 +1,44 @@
+<html>
+ <header>
+ 	<title>URL Verify</title>
+	<script>
+		function validateURL(url)
+		{
+			console.log("validateURL is called with url: "+url);
+			var fileOrFolder = new File('/home/sulabh/Documents/CDA/interview/Germany/tutao/program/javascript/URLVerify/URLVerify.html');
+			if(!fileOrFolder.exists){
+				alert("Does not exist.");
+			}
+			var type = typeof fileOrFolder;
+			if (fileOrFolder.commonFiles){
+			    alert("It's a folder.");
+			} else {
+			    alert("It's a file.");
+			}
+		} 
+		function isURLCorrect(evt)
+		{
+			console.log("isURLCorrect is called");
+			let url;
+		   try {
+		     var character = String.fromCharCode(event.which);
+  			  var urlString = document.getElementById("urldata").value + character;
+		     url = new URL(urlString);
+		   } catch (_) {
+		     document.getElementById("error").value = urlString + " is not valid URL";
+		   }
+		   var validURL = url.protocol === "http:" || url.protocol === "https:";
+		   if(!validURL){
+		   	document.getElementById("error").value = url + " is not correct URL";
+		   }else{
+		   	document.getElementById("error").value = url + " is valid";
+		   	console.log(validateURL(url));
+		   }
+		}  
+	</script>
+ </header>
+ <body>
+ 		Please input URL to check: <input type="text" name="urldata" id="urldata" required maxlength="200" onkeypress="return isURLCorrect(event);" /><br />
+ 		<input type="label" name="error" id="error" readonly></input> <br />
+ </body>
+</html>
